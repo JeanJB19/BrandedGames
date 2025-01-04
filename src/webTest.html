@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Branded Games</title>
+
+  <!-- Bootstrap CSS (Optional) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+
+  <!-- Font Awesome (for social icons & stat icons) -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-..."
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <!-- Your Custom CSS -->
+  <style>
+    /* Hero Section Styles */
+    .hero {
+      background: url("../images/Banner1.png") center/cover no-repeat;
+      color: #00000079;
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #fff;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: #fff;
+    }
+
+    /* Force card images to a consistent size */
+    .card-img-top {
+      width: 100%;
+      height: 200px;      /* Fixed height so images match */
+      object-fit: cover;  /* Crop to fill the 200px height */
+      object-position: 50% 50%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#">Branded Games</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#games">Games</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Branded Games</h1>
+      <p>We create immersive worlds and unforgettable experiences.</p>
+      <a href="#games" class="btn btn-primary mt-3">See Our Games</a>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-5 bg-dark text-white">
+    <div class="container">
+      <div class="row text-center">
+        <!-- Monthly Active Users -->
+        <div class="col-md-3 mb-4 mb-md-0">
+          <div class="display-4 mb-2">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3>1.2M+</h3>
+          <p class="mb-0">Monthly Active Users</p>
+        </div>
+        <!-- Total Visits -->
+        <div class="col-md-3 mb-4 mb-md-0">
+          <div class="display-4 mb-2">
+            <i class="fas fa-globe-americas"></i>
+          </div>
+          <h3>2B+</h3>
+          <p class="mb-0">Total Visits</p>
+        </div>
+        <!-- Currently Playing -->
+        <div class="col-md-3 mb-4 mb-md-0">
+          <div class="display-4 mb-2">
+            <i class="fas fa-gamepad"></i>
+          </div>
+          <h3>28.6K+</h3>
+          <p class="mb-0">Currently Playing</p>
+        </div>
+        <!-- Members -->
+        <div class="col-md-3">
+          <div class="display-4 mb-2">
+            <i class="fas fa-user-friends"></i>
+          </div>
+          <h3>6.3M+</h3>
+          <p class="mb-0">Members</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Games Section -->
+  <section id="games" class="py-5">
+    <div class="container">
+      <h2 class="mb-4">Our Games</h2>
+      <div class="row g-4">
+        <!-- Game 1 -->
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="../images/SpeedSimIcon.png"
+              class="card-img-top"
+              alt="Game 1"
+            />
+            <div class="card-body">
+              <!-- Title -->
+              <h5 class="card-title">Speed Simulator</h5>
+              <!-- Stats: Playing & Visits -->
+              <p class="text-muted mb-1">
+                <i class="fas fa-user-friends me-1"></i> 62+ Playing
+                <br />
+                <i class="fas fa-chart-line me-1"></i> 1.6M+ Visits
+              </p>
+              <!-- Short Description -->
+              <p class="card-text">
+                Race through vibrant worlds, unlock boosts, and level up your speed. 
+                Challenge friends to see who’s the fastest. You’ll never slow down!
+              </p>
+              <!-- Larger, Green Play Button -->
+              <a href="#" class="btn btn-success btn-lg">Play!</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game 2 -->
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="../images/AmazingObbyIcon.png"
+              class="card-img-top"
+              alt="Game 2"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Amazing Obby</h5>
+              <p class="text-muted mb-1">
+                <i class="fas fa-user-friends me-1"></i> 2+ Playing
+                <br />
+                <i class="fas fa-chart-line me-1"></i> 533.9K+ Visits
+              </p>
+              <p class="card-text">
+                Explore tricky obstacle courses with surprising twists. Leap, slide, 
+                and climb your way to the finish line in this unpredictable adventure!
+              </p>
+              <a href="#" class="btn btn-success btn-lg">Play!</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Game 3 -->
+        <div class="col-md-4">
+          <div class="card">
+            <img
+              src="../images/coming soon.png"
+              class="card-img-top"
+              alt="Game 3"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Coming Soon</h5>
+              <p class="text-muted mb-1">
+                <i class="fas fa-user-friends me-1"></i> 0 Playing
+                <br />
+                <i class="fas fa-chart-line me-1"></i> — Visits
+              </p>
+              <p class="card-text">
+                A mysterious new experience is on the horizon. Stay tuned for exciting 
+                updates and be the first to discover what’s coming next!
+              </p>
+              <!-- Disabled Button -->
+              <a href="#" class="btn btn-secondary btn-lg disabled">Not Available</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-5 bg-light">
+    <div class="container">
+      <h2>About Us</h2>
+      <p>
+        We are an indie game development studio brought to you on the ROBLOX platform. 
+        Our motto is 'From Ideas to Experiences' which reflects our commitment to transforming creative concepts into immersive 
+        and enjoyable adventures.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-5">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p>Have questions or want to work with us? Send us a message!</p>
+      <form>
+        <div class="mb-3">
+          <label for="name" class="form-label">Name:</label>
+          <input id="name" type="text" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email:</label>
+          <input id="email" type="email" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label for="message" class="form-label">Message:</label>
+          <textarea id="message" class="form-control" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Send</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-dark text-white text-center py-3">
+    <div class="container">
+      <p class="mb-2">&copy; 2025 Branded Games. All rights reserved.</p>
+      <div>
+        <!-- Discord -->
+        <a
+          href="https://discord.gg/vnsTkjeAkU"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-white mx-2"
+          aria-label="Discord"
+        >
+          <i class="fab fa-discord fa-lg"></i>
+        </a>
+        <!-- Twitter (X) -->
+        <a
+          href="https://x.com/BrandedGamesRBX"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-white mx-2"
+          aria-label="Twitter/X"
+        >
+          <i class="fab fa-twitter fa-lg"></i>
+        </a>
+        <!-- YouTube -->
+        <a
+          href="https://www.youtube.com/@BrandedGamesRBX"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-white mx-2"
+          aria-label="YouTube"
+        >
+          <i class="fab fa-youtube fa-lg"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS (Optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Simple JS to auto-update year -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
