@@ -24,7 +24,8 @@
   <style>
     /* Hero Section Styles */
     .hero {
-      background: url("images/Banner1.png") center/cover no-repeat;
+      /* Removed "images/" — now just "Banner1.png" in same folder */
+      background: url("Banner1.png") center/cover no-repeat;
       color: #00000079;
       padding: 80px 20px;
       text-align: center;
@@ -42,8 +43,8 @@
     /* Force card images to a consistent size */
     .card-img-top {
       width: 100%;
-      height: 200px;      /* Fixed height so images match */
-      object-fit: cover;  /* Crop to fill the 200px height */
+      height: 200px;       /* Fixed height so images match */
+      object-fit: cover;   /* Crop to fill the 200px height */
       object-position: 50% 50%;
     }
   </style>
@@ -138,26 +139,23 @@
         <!-- Game 1 -->
         <div class="col-md-4">
           <div class="card">
+            <!-- Removed "images/" in src -->
             <img
-              src="images/SpeedSimIcon.png"
+              src="SpeedSimIcon.png"
               class="card-img-top"
               alt="Game 1"
             />
             <div class="card-body">
-              <!-- Title -->
               <h5 class="card-title">Speed Simulator</h5>
-              <!-- Stats: Playing & Visits -->
               <p class="text-muted mb-1">
                 <i class="fas fa-user-friends me-1"></i> 62+ Playing
                 <br />
                 <i class="fas fa-chart-line me-1"></i> 1.6M+ Visits
               </p>
-              <!-- Short Description -->
               <p class="card-text">
-                Race through vibrant worlds, unlock boosts, and level up your speed. 
+                Race through vibrant worlds, unlock boosts, and level up your speed.
                 Challenge friends to see who’s the fastest. You’ll never slow down!
               </p>
-              <!-- Larger, Green Play Button -->
               <a href="#" class="btn btn-success btn-lg">Play!</a>
             </div>
           </div>
@@ -167,7 +165,7 @@
         <div class="col-md-4">
           <div class="card">
             <img
-              src="images/AmazingObbyIcon.png"
+              src="AmazingObbyIcon.png"
               class="card-img-top"
               alt="Game 2"
             />
@@ -179,7 +177,7 @@
                 <i class="fas fa-chart-line me-1"></i> 533.9K+ Visits
               </p>
               <p class="card-text">
-                Explore tricky obstacle courses with surprising twists. Leap, slide, 
+                Explore tricky obstacle courses with surprising twists. Leap, slide,
                 and climb your way to the finish line in this unpredictable adventure!
               </p>
               <a href="#" class="btn btn-success btn-lg">Play!</a>
@@ -190,8 +188,10 @@
         <!-- Game 3 -->
         <div class="col-md-4">
           <div class="card">
+            <!-- If your file is named "coming soon.png" but replaced spaces with hyphens, 
+                 ensure it matches exactly: "coming-soon.png" -->
             <img
-              src="images/coming-soon.png"
+              src="coming-soon.png"
               class="card-img-top"
               alt="Game 3"
             />
@@ -203,10 +203,9 @@
                 <i class="fas fa-chart-line me-1"></i> — Visits
               </p>
               <p class="card-text">
-                A mysterious new experience is on the horizon. Stay tuned for exciting 
+                A mysterious new experience is on the horizon. Stay tuned for exciting
                 updates and be the first to discover what’s coming next!
               </p>
-              <!-- Disabled Button -->
               <a href="#" class="btn btn-secondary btn-lg disabled">Not Available</a>
             </div>
           </div>
@@ -221,9 +220,9 @@
     <div class="container">
       <h2>About Us</h2>
       <p>
-        We are an indie game development studio brought to you on the ROBLOX platform. 
-        Our motto is 'From Ideas to Experiences' which reflects our commitment to transforming creative concepts into immersive 
-        and enjoyable adventures.
+        We are an indie game development studio brought to you on the ROBLOX platform.
+        Our motto is 'From Ideas to Experiences' which reflects our commitment to transforming
+        creative concepts into immersive and enjoyable adventures.
       </p>
     </div>
   </section>
