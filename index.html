@@ -44,13 +44,13 @@
     }
 
     .stats-container {
-      background: linear-gradient(180deg, #3cc2ff, #1d80d6);
-      border: none;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
       padding: 1.5rem;
       border-radius: 1rem;
-      color: white;
     }
-
 
     .stats-container h3,
     .stats-container p {
@@ -193,11 +193,11 @@
     </div>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Home Section -->
   <section class="hero-section">
     <div class="overlay"></div>
     <div class="container">
-      <h1 class="display-4 fw-bold">From Ideas to Experiences</h1>
+      <p class="fw-semibold" style="font-size: 1.5rem; font-style: italic;">From Ideas to Experiences</p>
       <div class="stats-container mt-4">
         <div class="row text-center">
           <div class="col-md-3 mb-3 mb-md-0">
@@ -339,18 +339,18 @@
   <div class="container">
     <h2 style="font-weight: bold; margin-bottom: 1rem;">Contact Us</h2>
     <p class="mb-4">Have questions or want to work with us? Send us a message!</p>
-    <form>
+    <form action="https://formspree.io/f/movwayol" method="POST">
       <div class="mb-3">
         <label for="name" class="form-label">Name:</label>
-        <input id="name" type="text" class="form-control" required />
+        <input type="text" name="name" id="name" class="form-control" required />
       </div>
       <div class="mb-3">
         <label for="email" class="form-label">Email:</label>
-        <input id="email" type="email" class="form-control" required />
+        <input type="email" name="email" id="email" class="form-control" required />
       </div>
       <div class="mb-3">
         <label for="message" class="form-label">Message:</label>
-        <textarea id="message" class="form-control" rows="5" required></textarea>
+        <textarea name="message" id="message" class="form-control" rows="5" required></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Send</button>
     </form>
