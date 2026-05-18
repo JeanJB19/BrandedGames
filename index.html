@@ -56,6 +56,25 @@
   .nav nav{display:flex;gap:34px;font-family:"Sora";font-weight:600;font-size:.92rem}
   .nav nav a{color:var(--ink-dim);transition:color .2s}
   .nav nav a:hover{color:var(--ink)}
+  .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:42px;height:42px;background:transparent;border:1px solid var(--line);
+    border-radius:10px;cursor:pointer;padding:0;transition:border-color .2s}
+  .nav-toggle:hover{border-color:var(--accent)}
+  .nav-toggle span{display:block;width:20px;height:2px;background:var(--ink);
+    margin:0 auto;border-radius:2px;transition:transform .25s,opacity .25s}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .mobile-menu{display:none;flex-direction:column;gap:4px;
+    padding:0 24px;max-height:0;overflow:hidden;
+    background:rgba(10,14,26,.97);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+    transition:max-height .3s ease,padding .3s ease}
+  .mobile-menu.open{max-height:420px;padding:8px 24px 22px}
+  .mobile-menu a{font-family:"Sora";font-weight:600;font-size:1rem;
+    color:var(--ink-dim);padding:12px 4px;border-bottom:1px solid var(--line)}
+  .mobile-menu a:hover{color:var(--ink)}
+  .mobile-menu a.btn{color:#06121a;border-bottom:none;text-align:center}
   .btn{
     font-family:"Sora";font-weight:700;font-size:.9rem;
     padding:12px 22px;border-radius:999px;border:1px solid transparent;
@@ -203,6 +222,9 @@
   @media(max-width:860px){
     .services,.games-grid,.reviews{grid-template-columns:1fr}
     .nav nav{display:none}
+    .nav-cta{display:none}
+    .nav-toggle{display:flex}
+    .mobile-menu{display:flex}
     .stats{gap:36px}
     .contact-card{padding:32px}
   }
@@ -228,7 +250,19 @@
       <a href="#reviews">Reviews</a>
       <a href="#contact">Contact</a>
     </nav>
-    <a href="#contact" class="btn">Get in touch</a>
+    <a href="#contact" class="btn nav-cta">Get in touch</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home">About Us</a>
+    <a href="#services">Services</a>
+    <a href="#games">Games</a>
+    <a href="#partners">Partners</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact">Contact</a>
+    <a href="#contact" class="btn" style="margin-top:8px">Get in touch</a>
   </div>
 </header>
 
@@ -475,6 +509,23 @@
        onerror="this.parentNode.style.display='none'"></div>`
   ).join('');
   track.innerHTML = set + set;
+
+  // ---- MOBILE MENU ----
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  function closeMenu(){
+    navToggle.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    navToggle.setAttribute('aria-expanded','false');
+  }
+  navToggle.addEventListener('click',()=>{
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  mobileMenu.querySelectorAll('a').forEach(link=>{
+    link.addEventListener('click', closeMenu);
+  });
 
   // ---- BACK TO TOP ----
   const toTop = document.getElementById('toTop');
