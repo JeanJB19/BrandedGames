@@ -147,19 +147,36 @@
   .games-more{text-align:center;margin-top:46px}
 
   /* PARTNERS MARQUEE */
-  .marquee{overflow:hidden;position:relative;padding:14px 0;
-    mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+  .marquee{position:relative;padding:14px 0;overflow:visible}
+  .marquee-clip{overflow:hidden;padding-top:52px;margin-top:-52px;
+    mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
   .marquee-track{display:flex;gap:60px;width:max-content;animation:scroll 26s linear infinite}
   .marquee:hover .marquee-track{animation-play-state:paused}
   @keyframes scroll{to{transform:translateX(-50%)}}
   .logo{
+    position:relative;
     display:flex;align-items:center;justify-content:center;
-    height:60px;opacity:.7;transition:opacity .2s,filter .2s;
+    height:60px;opacity:.7;transition:opacity .2s,filter .2s;cursor:pointer;
   }
   .logo img{
     max-height:60px;max-width:170px;width:auto;object-fit:contain;display:block;
   }
   .logo:hover{opacity:1}
+  .logo .tip{
+    position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);
+    background:var(--panel-hi);color:var(--ink);
+    font-family:"Sora",sans-serif;font-weight:600;font-size:.8rem;white-space:nowrap;
+    padding:7px 12px;border-radius:9px;border:1px solid var(--line);
+    opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:5;
+  }
+  .logo .tip::after{
+    content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);
+    border:6px solid transparent;border-top-color:var(--panel-hi);
+  }
+  .logo:hover .tip,.logo.tip-open .tip{
+    opacity:1;transform:translateX(-50%) translateY(0);
+  }
 
   /* REVIEWS */
   .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -279,7 +296,7 @@
   <div class="stats">
     <div class="stat"><div class="n">3.0M+</div><div class="l">Total Play Sessions</div></div>
     <div class="stat"><div class="n">20K+</div><div class="l">Total Members</div></div>
-    <div class="stat"><div class="n">8</div><div class="l">Total Games</div></div>
+    <div class="stat"><div class="n" id="totalGames">8</div><div class="l">Total Games</div></div>
   </div>
 </section>
 </div>
@@ -339,7 +356,9 @@
     <p class="sec-sub">Teams and brands we've collaborated with.</p>
   </div>
   <div class="marquee">
-    <div class="marquee-track" id="track"></div>
+    <div class="marquee-clip">
+      <div class="marquee-track" id="track"></div>
+    </div>
   </div>
 </section>
 
@@ -452,6 +471,8 @@
      url:"https://www.roblox.com/games/2734651799/Limited-Lifting-Simulator"},
     {n:"Amazing Obby", plays:"2.6K Plays", role:"Owner", img:"Assets/AmazingObbyIcon.png",
      url:"https://www.roblox.com/games/72000569347548/Amazing-Obby"},
+    {n:"Mage Tower Defense", plays:"1.7K Plays", role:"Manager", img:"Assets/mageTD.png",
+     url:"https://www.roblox.com/games/92923167709043/Mage-Tower-Defense"},
   ];
   // Icon shown next to each role. Add/edit entries here (role name : Font Awesome icon).
   // Any role not listed falls back to the briefcase icon.
@@ -466,6 +487,9 @@
   const iconFor = role => roleIcons[role] || "fa-briefcase";
   const grid = document.getElementById('gamesGrid');
   const SHOWN = 3;
+  // Total Games stat updates automatically from the games array length
+  const totalGamesEl = document.getElementById('totalGames');
+  if (totalGamesEl) totalGamesEl.textContent = games.length;
   games.forEach((g,i)=>{
     const a = document.createElement('a');
     a.href = g.url; a.target = "_blank"; a.rel = "noopener noreferrer";
@@ -504,9 +528,22 @@
   const track = document.getElementById('track');
   const set = partners.map(p=>
     `<div class="logo"><img src="${p.img}" alt="${p.n}"
-       onerror="this.parentNode.style.display='none'"></div>`
+       onerror="this.parentNode.style.display='none'"><span class="tip">${p.n}</span></div>`
   ).join('');
   track.innerHTML = set + set;
+
+  // Mobile: tap a logo to toggle its name (closes others)
+  document.querySelectorAll('.logo').forEach(logo=>{
+    logo.addEventListener('click', e=>{
+      const wasOpen = logo.classList.contains('tip-open');
+      document.querySelectorAll('.logo.tip-open').forEach(l=>l.classList.remove('tip-open'));
+      if(!wasOpen) logo.classList.add('tip-open');
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener('click',()=>{
+    document.querySelectorAll('.logo.tip-open').forEach(l=>l.classList.remove('tip-open'));
+  });
 
   // ---- MOBILE MENU ----
   const navToggle = document.getElementById('navToggle');
