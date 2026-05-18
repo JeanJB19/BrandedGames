@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Branded Games</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="icon" type="image/png" href="../Assets/companyLogo.png">
+<style>
+  :root{
+    --bg:#0a0e1a;
+    --bg-2:#0f1525;
+    --panel:#131a2e;
+    --panel-hi:#1a2440;
+    --ink:#eef2ff;
+    --ink-dim:#9aa6c4;
+    --line:rgba(255,255,255,.08);
+    --accent:#46e0c8;
+    --accent-2:#7c8cff;
+    --glow:0 0 40px rgba(70,224,200,.25);
+    --r:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:
+      radial-gradient(900px 500px at 80% -10%, rgba(124,140,255,.18), transparent 60%),
+      radial-gradient(700px 500px at 0% 20%, rgba(70,224,200,.12), transparent 55%),
+      var(--bg);
+    color:var(--ink);
+    font-family:"Sora",-apple-system,sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4,.disp{font-family:"Sora",sans-serif;letter-spacing:-.02em;line-height:1.1}
+  .mono{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  section{padding:110px 0;position:relative}
+  a{color:inherit;text-decoration:none}
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:blur(14px);
+    background:rgba(10,14,26,.6);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{font-family:"Sora";font-weight:800;font-size:1.25rem;display:flex;align-items:center;gap:10px}
+  .brand .dot{width:13px;height:13px;border-radius:4px;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:var(--glow)}
+  .brand-logo{height:46px;width:auto;display:block}
+  .nav nav{display:flex;gap:34px;font-family:"Sora";font-weight:600;font-size:.92rem}
+  .nav nav a{color:var(--ink-dim);transition:color .2s}
+  .nav nav a:hover{color:var(--ink)}
+  .btn{
+    font-family:"Sora";font-weight:700;font-size:.9rem;
+    padding:12px 22px;border-radius:999px;border:1px solid transparent;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    color:#06121a;cursor:pointer;transition:transform .15s, box-shadow .2s;
+    display:inline-block;
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:var(--glow)}
+  .btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+  .btn.ghost:hover{border-color:var(--accent);box-shadow:none}
+
+  /* HERO */
+  .hero-bg{position:relative;isolation:isolate;overflow:hidden}
+  .hero-bg::before{
+    content:"";position:absolute;inset:0;z-index:0;
+    background:url('../Assets/Banner1.png') center/cover no-repeat;
+  }
+  .hero-bg::after{
+    content:"";position:absolute;inset:0;z-index:1;
+    background:linear-gradient(180deg, rgba(10,14,26,.78), rgba(10,14,26,.92));
+  }
+  .hero-bg > .hero{position:relative;z-index:2}
+  .hero{padding:120px 0 90px;text-align:center}
+  .hero h1{font-size:clamp(2.6rem,7vw,5rem);font-weight:800;max-width:15ch;margin:18px auto 22px;
+    background:linear-gradient(180deg,#fff,#aeb9dd);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero p{color:var(--ink-dim);font-size:1.15rem;max-width:54ch;margin:0 auto 36px}
+  .hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .stats{display:flex;gap:60px;justify-content:center;flex-wrap:wrap;margin-top:80px}
+  .stat .n{font-family:"Sora";font-weight:800;font-size:2.6rem;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat .l{color:var(--ink-dim);font-size:.92rem;margin-top:4px}
+
+  .eyebrow{display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:14px}
+  .eyebrow::before,.eyebrow::after{content:"";height:1px;width:46px;background:var(--line)}
+  .sec-title{text-align:center;font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:14px}
+  .sec-sub{text-align:center;color:var(--ink-dim);max-width:56ch;margin:0 auto 64px;
+    font-family:"Sora",sans-serif;font-weight:400;letter-spacing:-.01em}
+
+  /* SERVICES */
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .svc{
+    background:linear-gradient(180deg,var(--panel),var(--bg-2));
+    border:1px solid var(--line);border-radius:var(--r);
+    padding:26px 24px;position:relative;overflow:hidden;
+    transition:transform .25s, border-color .25s;
+  }
+  .svc:hover{transform:translateY(-6px);border-color:rgba(70,224,200,.4)}
+  .svc::after{content:"";position:absolute;inset:0;background:radial-gradient(300px 140px at 50% 0%,rgba(124,140,255,.16),transparent 70%);opacity:0;transition:opacity .3s}
+  .svc:hover::after{opacity:1}
+  .svc .ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+    background:rgba(70,224,200,.12);border:1px solid rgba(70,224,200,.3);font-size:1.15rem;margin-bottom:16px;color:var(--accent)}
+  .svc h3{font-size:1.2rem;font-weight:700;margin-bottom:9px}
+  .svc p{color:var(--ink-dim);font-size:.92rem}
+
+  /* GAMES */
+  .games-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .game{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+    overflow:hidden;transition:transform .25s,border-color .25s;display:block;
+  }
+  .game:hover{transform:translateY(-5px);border-color:rgba(124,140,255,.5)}
+  .game .thumb{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--panel-hi)}
+  .game .body{padding:18px 20px}
+  .game h4{font-family:"Sora";font-weight:700;font-size:1.08rem;margin-bottom:10px;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .game .meta{display:flex;justify-content:space-between;align-items:center;
+    color:var(--ink-dim);font-size:.85rem;font-family:"JetBrains Mono"}
+  .game .meta .role{color:var(--accent);font-weight:700;white-space:nowrap}
+  .game.hidden{display:none}
+  .games-more{text-align:center;margin-top:46px}
+
+  /* PARTNERS MARQUEE */
+  .marquee{overflow:hidden;position:relative;padding:14px 0;
+    mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+  .marquee-track{display:flex;gap:60px;width:max-content;animation:scroll 26s linear infinite}
+  .marquee:hover .marquee-track{animation-play-state:paused}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+  .logo{
+    display:flex;align-items:center;justify-content:center;
+    height:60px;opacity:.7;transition:opacity .2s,filter .2s;
+  }
+  .logo img{
+    max-height:60px;max-width:170px;width:auto;object-fit:contain;display:block;
+  }
+  .logo:hover{opacity:1}
+
+  /* REVIEWS */
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .review{
+    background:linear-gradient(180deg,var(--panel),var(--bg-2));
+    border:1px solid var(--line);border-radius:var(--r);padding:30px 28px;
+  }
+  .review .stars{color:var(--accent);letter-spacing:3px;margin-bottom:16px}
+  .review p{font-size:1.02rem;margin-bottom:22px}
+  .review .who{display:flex;align-items:center;gap:13px}
+  .review .av{width:42px;height:42px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
+    display:grid;place-items:center;font-family:"Sora";font-weight:800;color:#06121a}
+  .review .who b{font-family:"Sora";display:block;font-size:.95rem}
+  .review .who span{color:var(--ink-dim);font-size:.82rem}
+
+  /* CONTACT */
+  .contact-card{
+    background:linear-gradient(180deg,var(--panel),var(--bg-2));
+    border:1px solid var(--line);border-radius:24px;padding:48px;max-width:680px;margin:0 auto;
+  }
+  .field{margin-bottom:22px}
+  .field label{display:block;font-family:"Sora";font-weight:600;font-size:.88rem;margin-bottom:9px}
+  .field label .req{color:var(--accent)}
+  .field input,.field select,.field textarea{
+    width:100%;padding:14px 16px;border-radius:12px;
+    background:var(--bg);border:1px solid var(--line);color:var(--ink);
+    font-family:"Sora",sans-serif;font-size:1rem;outline:none;transition:border-color .2s
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
+  .field select{appearance:none;cursor:pointer;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%239aa6c4' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 16px center}
+  .field textarea{resize:vertical;min-height:120px}
+  .form-msg{display:none;margin-top:18px;padding:14px 18px;border-radius:12px;
+    background:rgba(70,224,200,.12);border:1px solid rgba(70,224,200,.4);
+    color:var(--accent);font-family:"Sora";font-weight:600;font-size:.9rem}
+  .field .err{display:none;color:#ff8b8b;font-size:.82rem;margin-top:6px;font-family:"Sora"}
+
+  /* BACK TO TOP */
+  #toTop{
+    position:fixed;right:26px;bottom:26px;z-index:60;
+    width:52px;height:52px;border-radius:50%;border:1px solid var(--line);
+    background:var(--panel-hi);color:var(--ink);cursor:pointer;
+    display:grid;place-items:center;font-size:1.2rem;
+    opacity:0;pointer-events:none;transform:translateY(16px);
+    transition:opacity .3s,transform .3s,box-shadow .2s
+  }
+  #toTop.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+  #toTop:hover{box-shadow:var(--glow);border-color:var(--accent)}
+
+  footer{border-top:1px solid var(--line);padding:46px 0}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;
+    color:var(--ink-dim);font-size:.88rem}
+  .foot .social{display:flex;gap:18px;font-size:1.15rem}
+  .foot .social a{color:var(--ink-dim);transition:color .2s}
+  .foot .social a:hover{color:var(--accent)}
+  .foot .social .rbx-ico{width:1.05em;height:1.05em;vertical-align:-0.15em;display:inline-block}
+
+  @media(max-width:860px){
+    .services,.games-grid,.reviews{grid-template-columns:1fr}
+    .nav nav{display:none}
+    .stats{gap:36px}
+    .contact-card{padding:32px}
+  }
+</style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-6D5DL1E5FN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-6D5DL1E5FN');
+</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#home" class="brand"><img src="../Assets/fullLogo.png" alt="Branded Games" class="brand-logo"></a>
+    <nav>
+      <a href="#services">Services</a>
+      <a href="#games">Games</a>
+      <a href="#partners">Partners</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a href="#contact" class="btn">Get in touch</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero-bg">
+<section class="hero wrap" id="home">
+  <!-- <div class="mono">Game Studio · Acquisition · Advising</div> -->
+  <h1>From Ideas to Experiences.</h1>
+  <p>An indie game studio on Roblox, building standout experiences for players & clients.
+    Our motto, “From Ideas to Experiences,” reflects our passion for turning creative visions 
+    into immersive, high-quality adventures.</p>
+  <div class="cta">
+    <a href="#services" class="btn">Explore services</a>
+    <a href="#games" class="btn ghost">See our games</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="n">3.0M+</div><div class="l">Total Play Sessions</div></div>
+    <div class="stat"><div class="n">19K+</div><div class="l">Total Members</div></div>
+    <div class="stat"><div class="n">7</div><div class="l">Total Games</div></div>
+  </div>
+</section>
+</div>
+
+<!-- SERVICES -->
+<section id="services" style="padding-bottom:55px">
+  <div class="wrap">
+    <div class="eyebrow"><span class="mono">What we do</span></div>
+    <h2 class="sec-title">Our Services</h2>
+    <p class="sec-sub">Three ways we work with developers and brands.</p>
+    <div class="services">
+      <div class="svc">
+        <div class="ico"><i class="fas fa-handshake"></i></div>
+        <h3>Acquisition</h3>
+        <p>Looking to sell your game or partner with larger studios to help with LiveOps? We connect developers with top 
+          studios and investors across our network to explore acquisition and partnership opportunities. In 
+          exchange, we operate on a commission-based structure, typically ranging from 3%–15% depending on the deal.</p>
+      </div>
+      <div class="svc">
+        <div class="ico"><i class="fas fa-gamepad"></i></div>
+        <h3>Game Creation</h3>
+        <p>Have a vision for a game? We handle the heavy lifting. Starting from Planning → Development → QA → 
+          Launch. We turn your idea into a polished Roblox experience, while maintaining the essence of your creative vision.</p>
+      </div>
+      <div class="svc">
+        <div class="ico"><i class="fas fa-compass"></i></div>
+        <h3>Advising</h3>
+        <p>Looking to enter the Roblox ecosystem but unsure where to start? We help brands, creators, 
+          and studios navigate the platform with guidance on game development, UGC creation, monetization, 
+          growth strategy, and live game operations.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GAMES -->
+<section id="games" style="padding-top:55px;background:linear-gradient(180deg,transparent,var(--bg-2),transparent)">
+  <div class="wrap">
+    <div class="eyebrow"><span class="mono">Portfolio</span></div>
+    <h2 class="sec-title">Our Games</h2>
+    <p class="sec-sub">A selection from our catalog — with more on the way. Tap below to see them all.</p>
+    <div class="games-grid" id="gamesGrid"></div>
+    <div class="games-more">
+      <button class="btn ghost" id="moreBtn">Show all games ↓</button>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section id="partners">
+  <div class="wrap">
+    <div class="eyebrow"><span class="mono">Trusted by</span></div>
+    <h2 class="sec-title">Our Partners</h2>
+    <p class="sec-sub">Teams and brands we've collaborated with.</p>
+  </div>
+  <div class="marquee">
+    <div class="marquee-track" id="track"></div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section id="reviews" style="background:linear-gradient(180deg,transparent,var(--bg-2),transparent)">
+  <div class="wrap">
+    <div class="eyebrow"><span class="mono">Testimonials</span></div>
+    <h2 class="sec-title">What Clients Say</h2>
+    <p class="sec-sub">Feedback from the developers and teams we've worked with.</p>
+    <div class="reviews">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>"The acquisition process was smooth and fair. They valued the work
+           we put in and made the handoff painless."</p>
+        <div class="who"><div class="av">JM</div>
+          <div><b>Jordan M.</b><span>Indie Developer</span></div></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>"Their team rebuilt our game's core loop and our retention nearly
+           doubled within a month. Genuinely impressive."</p>
+        <div class="who"><div class="av">SK</div>
+          <div><b>Sam K.</b><span>Studio Lead</span></div></div>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>"The advising sessions gave us a clear roadmap. We finally
+           understood what the algorithm actually rewards."</p>
+        <div class="who"><div class="av">AR</div>
+          <div><b>Alex R.</b><span>Game Creator</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow"><span class="mono">Get in touch</span></div>
+    <h2 class="sec-title">Contact Us</h2>
+    <p class="sec-sub">Have questions or want to work with us? Send us a message.</p>
+    <div class="contact-card">
+      <form id="contactForm" action="https://formspree.io/f/movwayol" method="POST" novalidate>
+        <div class="field">
+          <label>Name <span class="req">*</span></label>
+          <input type="text" name="name" id="name" required placeholder="Your name">
+          <div class="err" data-for="name">Please enter your name.</div>
+        </div>
+        <div class="field">
+          <label>Email <span class="req">*</span></label>
+          <input type="email" name="email" id="email" required placeholder="you@example.com">
+          <div class="err" data-for="email">Please enter a valid email.</div>
+        </div>
+        <div class="field">
+          <label>What can we help with? <span class="req">*</span></label>
+          <select name="topic" id="topic" required>
+            <option value="">— Select an option —</option>
+            <option value="Acquisition Opportunities">Acquisition Opportunities</option>
+            <option value="Game Creation">Game Creation</option>
+            <option value="Advising">Advising</option>
+            <option value="Other">Other</option>
+          </select>
+          <div class="err" data-for="topic">Please select an option.</div>
+        </div>
+        <div class="field">
+          <label>Message <span class="req">*</span></label>
+          <textarea name="message" id="message" required placeholder="Tell us a bit more..."></textarea>
+          <div class="err" data-for="message">Please enter a message.</div>
+        </div>
+        <button type="submit" class="btn" style="width:100%">Send message</button>
+        <div class="form-msg" id="formMsg">✓ Thanks! Your message has been sent.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <small>© 2026 Branded Games. All rights reserved.</small>
+    <div class="social">
+      <a href="https://twitter.com/BrandedGamesRBX" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.roblox.com/communities/4292399" target="_blank" aria-label="Roblox"><svg class="rbx-ico" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M105.6 0 0 404.5 406.4 512 512 107.5 105.6 0zm222.9 332.9-126.6-33.5 33.5-126.6 126.6 33.5-33.5 126.6z"/></svg></a>
+      <a href="https://discord.gg/vnsTkjeAkU" target="_blank" aria-label="Discord"><i class="fab fa-discord"></i></a>
+      <a href="https://www.linkedin.com/company/branded-games" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a href="https://www.tiktok.com/@brandedgamesrbx" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.youtube.com/@BrandedGamesRBX" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" aria-label="Back to top">↑</button>
+
+<script>
+  // ---- GAMES (real data from your site; first 3 shown, rest expand) ----
+  // Edit the "role" field for each game with the correct position.
+  const games = [
+    {n:"Speed Simulator", plays:"2.9M Plays", role:"Owner", img:"../Assets/SpeedSimIcon.png",
+     url:"https://www.roblox.com/games/2130573407/Speed-Drink-Simulator"},
+    {n:"SkyLands Tycoon", plays:"68.4K Plays", role:"Owner", img:"../Assets/skylandsIcon.png",
+     url:"https://www.roblox.com/games/92054108165942/SkyLands-Tycoon"},
+    {n:"Fame Simulator", plays:"45.4K Plays", role:"Owner", img:"../Assets/famesimicon.png",
+     url:"https://www.roblox.com/games/2668515686/Fame-Simulator"},
+    {n:"Shred a Pet", plays:"13.2K Plays", role:"Owner", img:"../Assets/ShredAPet.png",
+     url:"https://www.roblox.com/games/107508702684449/Shred-a-Pet"},
+    {n:"Barbarian Lifting Simulator", plays:"13.9K Plays", role:"Owner", img:"../Assets/barbarianliftingsim.png",
+     url:"https://www.roblox.com/games/2574294965/Barbarian-Lifting-Simulator-Alpha"},
+    {n:"Limited Lifting Simulator", plays:"5.7K Plays", role:"Owner", img:"../Assets/limitedlifitngsim.png",
+     url:"https://www.roblox.com/games/2734651799/Limited-Lifting-Simulator"},
+    {n:"Amazing Obby", plays:"2.6K Plays", role:"Owner", img:"../Assets/AmazingObbyIcon.png",
+     url:"https://www.roblox.com/games/72000569347548/Amazing-Obby"},
+  ];
+  const grid = document.getElementById('gamesGrid');
+  const SHOWN = 3;
+  games.forEach((g,i)=>{
+    const a = document.createElement('a');
+    a.href = g.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+    a.className = 'game' + (i>=SHOWN ? ' hidden' : '');
+    a.innerHTML = `
+      <img class="thumb" src="${g.img}" alt="${g.n}"
+           onerror="this.style.background='var(--panel-hi)';this.removeAttribute('src');">
+      <div class="body">
+        <h4>${g.n}</h4>
+        <div class="meta">
+          <span><i class="fas fa-play" style="margin-right:6px"></i>${g.plays}</span>
+          <span class="role"><i class="fas fa-briefcase" style="margin-right:6px"></i>${g.role}</span>
+        </div>
+      </div>`;
+    grid.appendChild(a);
+  });
+  const moreBtn = document.getElementById('moreBtn');
+  let expanded = false;
+  moreBtn.addEventListener('click',()=>{
+    expanded = !expanded;
+    document.querySelectorAll('.game').forEach((el,i)=>{
+      if(i>=SHOWN) el.classList.toggle('hidden', !expanded);
+    });
+    moreBtn.textContent = expanded ? 'Show less ↑' : 'Show all games ↓';
+    if(!expanded) document.getElementById('games').scrollIntoView({behavior:'smooth'});
+  });
+
+  // ---- PARTNERS MARQUEE (edit names + image files; duplicated for seamless loop) ----
+  // Put each partner's logo in the Assets folder and update "img" + "n" (alt text).
+ const partners = [
+    {n:"Beerded Games Studio",   img:"../Assets/beerdedgames.png"},
+    {n:"GringGreat",   img:"../Assets/gringgreat.png"},
+    {n:"Crimson Manor", img:"../Assets/crimsonmanor.png"},
+  ];
+  const track = document.getElementById('track');
+  const set = partners.map(p=>
+    `<div class="logo"><img src="${p.img}" alt="${p.n}"
+       onerror="this.parentNode.style.display='none'"></div>`
+  ).join('');
+  track.innerHTML = set + set;
+
+  // ---- BACK TO TOP ----
+  const toTop = document.getElementById('toTop');
+  const headerEl = document.querySelector('header');
+  window.addEventListener('scroll',()=>{
+    toTop.classList.toggle('show', window.scrollY > headerEl.offsetHeight + 200);
+  });
+  toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+  // ---- CONTACT FORM VALIDATION (still posts to your Formspree) ----
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit',(e)=>{
+    let ok = true;
+    const checks = {
+      name: v => v.trim().length>0,
+      email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()),
+      topic: v => v !== "",
+      message: v => v.trim().length>0,
+    };
+    Object.keys(checks).forEach(id=>{
+      const f = document.getElementById(id);
+      const err = document.querySelector(`.err[data-for="${id}"]`);
+      const valid = checks[id](f.value);
+      err.style.display = valid ? 'none' : 'block';
+      f.style.borderColor = valid ? '' : '#ff8b8b';
+      if(!valid) ok = false;
+    });
+    if(!ok){ e.preventDefault(); }
+  });
+</script>
+</body>
+</html>
