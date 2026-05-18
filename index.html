@@ -532,6 +532,45 @@
   ).join('');
   track.innerHTML = set + set;
 
+  // Handle temporary 3-second visibility on hover or click without stopping the track
+  document.querySelectorAll('.logo').forEach(logo => {
+    let timer;
+
+    const showTooltip = () => {
+      // Clear any existing timers on this logo
+      clearTimeout(timer);
+      
+      // Close other open tips first
+      document.querySelectorAll('.logo.tip-open').forEach(l => l.classList.remove('tip-open'));
+      
+      // Open this tooltip
+      logo.classList.add('tip-open');
+
+      // Hide it automatically after 3 seconds (3000ms)
+      timer = setTimeout(() => {
+        logo.classList.remove('tip-open');
+      }, 3000);
+    };
+
+    // Desktop hover handling
+    logo.addEventListener('mouseenter', showTooltip);
+    logo.addEventListener('mouseleave', () => {
+      clearTimeout(timer);
+      logo.classList.remove('tip-open');
+    });
+
+    // Mobile/Tablet tap handling
+    logo.addEventListener('click', e => {
+      showTooltip();
+      e.stopPropagation();
+    });
+  });
+
+  // Remove the CSS hover pause rule dynamically so scrolling never interrupts
+  const styleSheet = document.createElement("style");
+  styleSheet.innerText = ".marquee:hover .marquee-track { animation-play-state: running !important; }";
+  document.head.appendChild(styleSheet);
+
   // Mobile: tap a logo to toggle its name (closes others)
   document.querySelectorAll('.logo').forEach(logo=>{
     logo.addEventListener('click', e=>{
