@@ -25,6 +25,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
+  section[id]{scroll-margin-top:90px}
   body{
     background:
       radial-gradient(900px 500px at 80% -10%, rgba(124,140,255,.18), transparent 60%),
@@ -220,6 +221,7 @@
   <div class="wrap nav">
     <a href="#home" class="brand"><img src="Assets/fullLogo.png" alt="Branded Games" class="brand-logo"></a>
     <nav>
+      <a href="#home">About Us</a>
       <a href="#services">Services</a>
       <a href="#games">Games</a>
       <a href="#partners">Partners</a>
@@ -267,8 +269,11 @@
       <div class="svc">
         <div class="ico"><i class="fas fa-gamepad"></i></div>
         <h3>Game Creation</h3>
-        <p>Have a vision for a game? We handle the heavy lifting. Starting from Planning → Development → QA → 
-          Launch. We turn your idea into a polished Roblox experience, while maintaining the essence of your creative vision.</p>
+        <p>
+          Have a vision for a game? We handle the heavy lifting. Starting from Planning and Development to QA and Launch.  
+          We turn your idea into a polished Roblox experience while preserving your creative vision. 
+          We also work closely with clients to ensure strong monetization systems and player retention strategies are built into every project.
+        </p>
       </div>
       <div class="svc">
         <div class="ico"><i class="fas fa-compass"></i></div>
@@ -401,11 +406,13 @@
   const games = [
     {n:"Speed Simulator", plays:"2.9M Plays", role:"Owner", img:"Assets/SpeedSimIcon.png",
      url:"https://www.roblox.com/games/2130573407/Speed-Drink-Simulator"},
-    {n:"SkyLands Tycoon", plays:"68.4K Plays", role:"Owner", img:"Assets/skylandsIcon.png",
+    {n:"SkyLands Tycoon", plays:"129.3K Plays", role:"Owner", img:"Assets/skylandsIcon.png",
      url:"https://www.roblox.com/games/92054108165942/SkyLands-Tycoon"},
+    {n:"Roblox But Every Second You Get +1 Size!", plays:"278.3K Plays", role:"UI Designer", img:"Assets/+1SizeGame.png",
+     url:"https://www.roblox.com/games/11403211837/Roblox-But-Every-Second-You-Get-1-Size"},
     {n:"Fame Simulator", plays:"45.4K Plays", role:"Owner", img:"Assets/famesimicon.png",
      url:"https://www.roblox.com/games/2668515686/Fame-Simulator"},
-    {n:"Shred a Pet", plays:"13.2K Plays", role:"Owner", img:"Assets/ShredAPet.png",
+    {n:"Shred a Pet", plays:"15.2K Plays", role:"Former Owner", img:"Assets/ShredAPet.png",
      url:"https://www.roblox.com/games/107508702684449/Shred-a-Pet"},
     {n:"Barbarian Lifting Simulator", plays:"13.9K Plays", role:"Owner", img:"Assets/barbarianliftingsim.png",
      url:"https://www.roblox.com/games/2574294965/Barbarian-Lifting-Simulator-Alpha"},
@@ -414,6 +421,17 @@
     {n:"Amazing Obby", plays:"2.6K Plays", role:"Owner", img:"Assets/AmazingObbyIcon.png",
      url:"https://www.roblox.com/games/72000569347548/Amazing-Obby"},
   ];
+  // Icon shown next to each role. Add/edit entries here (role name : Font Awesome icon).
+  // Any role not listed falls back to the briefcase icon.
+  const roleIcons = {
+    "Owner":       "fa-crown",
+    "UI Designer": "fa-pen-ruler",
+    "Programmer":  "fa-code",
+    "Manager":     "fa-user-gear",
+    "Investor":    "fa-chart-line",
+    "Advisor":     "fa-compass",
+  };
+  const iconFor = role => roleIcons[role] || "fa-briefcase";
   const grid = document.getElementById('gamesGrid');
   const SHOWN = 3;
   games.forEach((g,i)=>{
@@ -427,7 +445,7 @@
         <h4>${g.n}</h4>
         <div class="meta">
           <span><i class="fas fa-play" style="margin-right:6px"></i>${g.plays}</span>
-          <span class="role"><i class="fas fa-briefcase" style="margin-right:6px"></i>${g.role}</span>
+          <span class="role"><i class="fas ${iconFor(g.role)}" style="margin-right:6px"></i>${g.role}</span>
         </div>
       </div>`;
     grid.appendChild(a);
@@ -449,6 +467,7 @@
     {n:"Beerded Games Studio",   img:"Assets/beerdedgames.png"},
     {n:"GringGreat",   img:"Assets/gringgreat.png"},
     {n:"Crimson Manor", img:"Assets/crimsonmanor.png"},
+    {n:"FindGames", img:"Assets/FTG.png"},
   ];
   const track = document.getElementById('track');
   const set = partners.map(p=>

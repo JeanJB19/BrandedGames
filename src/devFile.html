@@ -6,9 +6,9 @@
 <title>Branded Games</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Fraunces:opsz,wght@9..144,400;9..144,500&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-<link rel="icon" type="image/png" href="../Assets/companyLogo.png">
+<link rel="icon" type="image/png" href="Assets/companyLogo.png">
 <style>
   :root{
     --bg:#0a0e1a;
@@ -19,20 +19,20 @@
     --ink-dim:#9aa6c4;
     --line:rgba(255,255,255,.08);
     --accent:#46e0c8;
-    --accent-2:#3cc2ff;
-    --accent-3:#1d80d6;
+    --accent-2:#7c8cff;
     --glow:0 0 40px rgba(70,224,200,.25);
     --r:18px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
+  section[id]{scroll-margin-top:90px}
   body{
     background:
-      radial-gradient(900px 500px at 80% -10%, rgba(29,128,214,.18), transparent 60%),
+      radial-gradient(900px 500px at 80% -10%, rgba(124,140,255,.18), transparent 60%),
       radial-gradient(700px 500px at 0% 20%, rgba(70,224,200,.12), transparent 55%),
       var(--bg);
     color:var(--ink);
-    font-family:"Fraunces",Georgia,serif;
+    font-family:"Sora",-apple-system,sans-serif;
     line-height:1.6;
     overflow-x:hidden;
   }
@@ -51,7 +51,7 @@
   }
   .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
   .brand{font-family:"Sora";font-weight:800;font-size:1.25rem;display:flex;align-items:center;gap:10px}
-  .brand .dot{width:13px;height:13px;border-radius:4px;background:linear-gradient(135deg,var(--accent),var(--accent-2),var(--accent-3));box-shadow:var(--glow)}
+  .brand .dot{width:13px;height:13px;border-radius:4px;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:var(--glow)}
   .brand-logo{height:46px;width:auto;display:block}
   .nav nav{display:flex;gap:34px;font-family:"Sora";font-weight:600;font-size:.92rem}
   .nav nav a{color:var(--ink-dim);transition:color .2s}
@@ -59,7 +59,7 @@
   .btn{
     font-family:"Sora";font-weight:700;font-size:.9rem;
     padding:12px 22px;border-radius:999px;border:1px solid transparent;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2),var(--accent-3));
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
     color:#06121a;cursor:pointer;transition:transform .15s, box-shadow .2s;
     display:inline-block;
   }
@@ -71,7 +71,7 @@
   .hero-bg{position:relative;isolation:isolate;overflow:hidden}
   .hero-bg::before{
     content:"";position:absolute;inset:0;z-index:0;
-    background:url('../Assets/Banner1.png') center/cover no-repeat;
+    background:url('Assets/Banner1.png') center/cover no-repeat;
   }
   .hero-bg::after{
     content:"";position:absolute;inset:0;z-index:1;
@@ -85,29 +85,30 @@
   .hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
   .stats{display:flex;gap:60px;justify-content:center;flex-wrap:wrap;margin-top:80px}
   .stat .n{font-family:"Sora";font-weight:800;font-size:2.6rem;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2),var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent}
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
   .stat .l{color:var(--ink-dim);font-size:.92rem;margin-top:4px}
 
   .eyebrow{display:flex;align-items:center;gap:14px;justify-content:center;margin-bottom:14px}
   .eyebrow::before,.eyebrow::after{content:"";height:1px;width:46px;background:var(--line)}
   .sec-title{text-align:center;font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:14px}
-  .sec-sub{text-align:center;color:var(--ink-dim);max-width:56ch;margin:0 auto 64px}
+  .sec-sub{text-align:center;color:var(--ink-dim);max-width:56ch;margin:0 auto 64px;
+    font-family:"Sora",sans-serif;font-weight:400;letter-spacing:-.01em}
 
   /* SERVICES */
   .services{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
   .svc{
     background:linear-gradient(180deg,var(--panel),var(--bg-2));
     border:1px solid var(--line);border-radius:var(--r);
-    padding:38px 30px;position:relative;overflow:hidden;
+    padding:26px 24px;position:relative;overflow:hidden;
     transition:transform .25s, border-color .25s;
   }
   .svc:hover{transform:translateY(-6px);border-color:rgba(70,224,200,.4)}
-  .svc::after{content:"";position:absolute;inset:0;background:radial-gradient(300px 140px at 50% 0%,rgba(29,128,214,.16),transparent 70%);opacity:0;transition:opacity .3s}
+  .svc::after{content:"";position:absolute;inset:0;background:radial-gradient(300px 140px at 50% 0%,rgba(124,140,255,.16),transparent 70%);opacity:0;transition:opacity .3s}
   .svc:hover::after{opacity:1}
-  .svc .ico{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;
-    background:rgba(70,224,200,.12);border:1px solid rgba(70,224,200,.3);font-size:1.4rem;margin-bottom:22px;color:var(--accent)}
-  .svc h3{font-size:1.4rem;font-weight:700;margin-bottom:12px}
-  .svc p{color:var(--ink-dim);font-size:1rem}
+  .svc .ico{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+    background:rgba(70,224,200,.12);border:1px solid rgba(70,224,200,.3);font-size:1.15rem;margin-bottom:16px;color:var(--accent)}
+  .svc h3{font-size:1.2rem;font-weight:700;margin-bottom:9px}
+  .svc p{color:var(--ink-dim);font-size:.92rem}
 
   /* GAMES */
   .games-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -115,7 +116,7 @@
     background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
     overflow:hidden;transition:transform .25s,border-color .25s;display:block;
   }
-  .game:hover{transform:translateY(-5px);border-color:rgba(29,128,214,.5)}
+  .game:hover{transform:translateY(-5px);border-color:rgba(124,140,255,.5)}
   .game .thumb{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--panel-hi)}
   .game .body{padding:18px 20px}
   .game h4{font-family:"Sora";font-weight:700;font-size:1.08rem;margin-bottom:10px;
@@ -151,7 +152,7 @@
   .review p{font-size:1.02rem;margin-bottom:22px}
   .review .who{display:flex;align-items:center;gap:13px}
   .review .av{width:42px;height:42px;border-radius:50%;
-    background:linear-gradient(135deg,var(--accent),var(--accent-2),var(--accent-3));
+    background:linear-gradient(135deg,var(--accent),var(--accent-2));
     display:grid;place-items:center;font-family:"Sora";font-weight:800;color:#06121a}
   .review .who b{font-family:"Sora";display:block;font-size:.95rem}
   .review .who span{color:var(--ink-dim);font-size:.82rem}
@@ -167,7 +168,7 @@
   .field input,.field select,.field textarea{
     width:100%;padding:14px 16px;border-radius:12px;
     background:var(--bg);border:1px solid var(--line);color:var(--ink);
-    font-family:"Fraunces";font-size:1rem;outline:none;transition:border-color .2s
+    font-family:"Sora",sans-serif;font-size:1rem;outline:none;transition:border-color .2s
   }
   .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
   .field select{appearance:none;cursor:pointer;
@@ -218,8 +219,9 @@
 
 <header>
   <div class="wrap nav">
-    <a href="#home" class="brand"><img src="../Assets/fullLogo.png" alt="Branded Games" class="brand-logo"></a>
+    <a href="#home" class="brand"><img src="Assets/fullLogo.png" alt="Branded Games" class="brand-logo"></a>
     <nav>
+      <a href="#home">About Us</a>
       <a href="#services">Services</a>
       <a href="#games">Games</a>
       <a href="#partners">Partners</a>
@@ -235,7 +237,7 @@
 <section class="hero wrap" id="home">
   <!-- <div class="mono">Game Studio · Acquisition · Advising</div> -->
   <h1>From Ideas to Experiences.</h1>
-  <p>An indie game studio on Roblox — building standout experiences for players & clients.
+  <p>An indie game studio on Roblox, building standout experiences for players & clients.
     Our motto, “From Ideas to Experiences,” reflects our passion for turning creative visions 
     into immersive, high-quality adventures.</p>
   <div class="cta">
@@ -251,7 +253,7 @@
 </div>
 
 <!-- SERVICES -->
-<section id="services">
+<section id="services" style="padding-bottom:55px">
   <div class="wrap">
     <div class="eyebrow"><span class="mono">What we do</span></div>
     <h2 class="sec-title">Our Services</h2>
@@ -260,15 +262,18 @@
       <div class="svc">
         <div class="ico"><i class="fas fa-handshake"></i></div>
         <h3>Acquisition</h3>
-        <p>Looking to sell your game or partner with larger studios? We connect developers with top studios and 
-          investors across our network to explore acquisition and partnership opportunities. In exchange, we 
-          operate on a commission-based structure, typically ranging from 3%–15% depending on the deal.</p>
+        <p>Looking to sell your game or partner with larger studios to help with LiveOps? We connect developers with top 
+          studios and investors across our network to explore acquisition and partnership opportunities. In 
+          exchange, we operate on a commission-based structure, typically ranging from 3%–15% depending on the deal.</p>
       </div>
       <div class="svc">
         <div class="ico"><i class="fas fa-gamepad"></i></div>
         <h3>Game Creation</h3>
-        <p>Have a vision for a game? We handle the heavy lifting — from planning, development, and testing 
-          to launch — we turn your idea into a polished Roblox experience.</p>
+        <p>
+          Have a vision for a game? We handle the heavy lifting. Starting from Planning and Development to QA and Launch.  
+          We turn your idea into a polished Roblox experience while preserving your creative vision. 
+          We also work closely with clients to ensure strong monetization systems and player retention strategies are built into every project.
+        </p>
       </div>
       <div class="svc">
         <div class="ico"><i class="fas fa-compass"></i></div>
@@ -282,7 +287,7 @@
 </section>
 
 <!-- GAMES -->
-<section id="games" style="background:linear-gradient(180deg,transparent,var(--bg-2),transparent)">
+<section id="games" style="padding-top:55px;background:linear-gradient(180deg,transparent,var(--bg-2),transparent)">
   <div class="wrap">
     <div class="eyebrow"><span class="mono">Portfolio</span></div>
     <h2 class="sec-title">Our Games</h2>
@@ -399,21 +404,34 @@
   // ---- GAMES (real data from your site; first 3 shown, rest expand) ----
   // Edit the "role" field for each game with the correct position.
   const games = [
-    {n:"Speed Simulator", plays:"2.9M Plays", role:"Owner", img:"../Assets/SpeedSimIcon.png",
+    {n:"Speed Simulator", plays:"2.9M Plays", role:"Owner", img:"Assets/SpeedSimIcon.png",
      url:"https://www.roblox.com/games/2130573407/Speed-Drink-Simulator"},
-    {n:"SkyLands Tycoon", plays:"68.4K Plays", role:"Owner", img:"../Assets/skylandsIcon.png",
+    {n:"SkyLands Tycoon", plays:"129.3K Plays", role:"Owner", img:"Assets/skylandsIcon.png",
      url:"https://www.roblox.com/games/92054108165942/SkyLands-Tycoon"},
-    {n:"Fame Simulator", plays:"45.4K Plays", role:"Owner", img:"../Assets/famesimicon.png",
+    {n:"Roblox But Every Second You Get +1 Size!", plays:"278.3K Plays", role:"UI Designer", img:"Assets/+1SizeGame.png",
+     url:"https://www.roblox.com/games/11403211837/Roblox-But-Every-Second-You-Get-1-Size"},
+    {n:"Fame Simulator", plays:"45.4K Plays", role:"Owner", img:"Assets/famesimicon.png",
      url:"https://www.roblox.com/games/2668515686/Fame-Simulator"},
-    {n:"Shred a Pet", plays:"13.2K Plays", role:"Owner", img:"../Assets/ShredAPet.png",
+    {n:"Shred a Pet", plays:"13.2K Plays", role:"Owner", img:"Assets/ShredAPet.png",
      url:"https://www.roblox.com/games/107508702684449/Shred-a-Pet"},
-    {n:"Barbarian Lifting Simulator", plays:"13.9K Plays", role:"Owner", img:"../Assets/barbarianliftingsim.png",
+    {n:"Barbarian Lifting Simulator", plays:"13.9K Plays", role:"Owner", img:"Assets/barbarianliftingsim.png",
      url:"https://www.roblox.com/games/2574294965/Barbarian-Lifting-Simulator-Alpha"},
-    {n:"Limited Lifting Simulator", plays:"5.7K Plays", role:"Owner", img:"../Assets/limitedlifitngsim.png",
+    {n:"Limited Lifting Simulator", plays:"5.7K Plays", role:"Owner", img:"Assets/limitedlifitngsim.png",
      url:"https://www.roblox.com/games/2734651799/Limited-Lifting-Simulator"},
-    {n:"Amazing Obby", plays:"2.6K Plays", role:"Owner", img:"../Assets/AmazingObbyIcon.png",
+    {n:"Amazing Obby", plays:"2.6K Plays", role:"Owner", img:"Assets/AmazingObbyIcon.png",
      url:"https://www.roblox.com/games/72000569347548/Amazing-Obby"},
   ];
+  // Icon shown next to each role. Add/edit entries here (role name : Font Awesome icon).
+  // Any role not listed falls back to the briefcase icon.
+  const roleIcons = {
+    "Owner":       "fa-crown",
+    "UI Designer": "fa-pen-ruler",
+    "Programmer":  "fa-code",
+    "Manager":     "fa-user-gear",
+    "Investor":    "fa-chart-line",
+    "Advisor":     "fa-compass",
+  };
+  const iconFor = role => roleIcons[role] || "fa-briefcase";
   const grid = document.getElementById('gamesGrid');
   const SHOWN = 3;
   games.forEach((g,i)=>{
@@ -427,7 +445,7 @@
         <h4>${g.n}</h4>
         <div class="meta">
           <span><i class="fas fa-play" style="margin-right:6px"></i>${g.plays}</span>
-          <span class="role"><i class="fas fa-briefcase" style="margin-right:6px"></i>${g.role}</span>
+          <span class="role"><i class="fas ${iconFor(g.role)}" style="margin-right:6px"></i>${g.role}</span>
         </div>
       </div>`;
     grid.appendChild(a);
@@ -446,9 +464,10 @@
   // ---- PARTNERS MARQUEE (edit names + image files; duplicated for seamless loop) ----
   // Put each partner's logo in the Assets folder and update "img" + "n" (alt text).
  const partners = [
-    {n:"Beerded Games Studio",   img:"../Assets/beerdedgames.png"},
-    {n:"GringGreat",   img:"../Assets/gringgreat.png"},
-    {n:"Crimson Manor", img:"../Assets/crimsonmanor.png"},
+    {n:"Beerded Games Studio",   img:"Assets/beerdedgames.png"},
+    {n:"GringGreat",   img:"Assets/gringgreat.png"},
+    {n:"Crimson Manor", img:"Assets/crimsonmanor.png"},
+    {n:"FindGames", img:"Assets/FTG.png"},
   ];
   const track = document.getElementById('track');
   const set = partners.map(p=>
