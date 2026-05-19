@@ -56,6 +56,25 @@
   .nav nav{display:flex;gap:34px;font-family:"Sora";font-weight:600;font-size:.92rem}
   .nav nav a{color:var(--ink-dim);transition:color .2s}
   .nav nav a:hover{color:var(--ink)}
+  .nav-toggle{display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:42px;height:42px;background:transparent;border:1px solid var(--line);
+    border-radius:10px;cursor:pointer;padding:0;transition:border-color .2s}
+  .nav-toggle:hover{border-color:var(--accent)}
+  .nav-toggle span{display:block;width:20px;height:2px;background:var(--ink);
+    margin:0 auto;border-radius:2px;transition:transform .25s,opacity .25s}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  .mobile-menu{display:none;flex-direction:column;gap:4px;
+    padding:0 24px;max-height:0;overflow:hidden;
+    background:rgba(10,14,26,.97);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+    transition:max-height .3s ease,padding .3s ease}
+  .mobile-menu.open{max-height:420px;padding:8px 24px 22px}
+  .mobile-menu a{font-family:"Sora";font-weight:600;font-size:1rem;
+    color:var(--ink-dim);padding:12px 4px;border-bottom:1px solid var(--line)}
+  .mobile-menu a:hover{color:var(--ink)}
+  .mobile-menu a.btn{color:#06121a;border-bottom:none;text-align:center}
   .btn{
     font-family:"Sora";font-weight:700;font-size:.9rem;
     padding:12px 22px;border-radius:999px;border:1px solid transparent;
@@ -128,19 +147,36 @@
   .games-more{text-align:center;margin-top:46px}
 
   /* PARTNERS MARQUEE */
-  .marquee{overflow:hidden;position:relative;padding:14px 0;
-    mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
-  .marquee-track{display:flex;gap:60px;width:max-content;animation:scroll 26s linear infinite}
+  .marquee{position:relative;padding:14px 0;overflow:visible}
+  .marquee-clip{overflow:hidden;padding-top:52px;margin-top:-52px;
+    mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+  .marquee-track{display:flex;gap:60px;width:max-content;animation:scroll 5s linear infinite}
   .marquee:hover .marquee-track{animation-play-state:paused}
   @keyframes scroll{to{transform:translateX(-50%)}}
   .logo{
+    position:relative;
     display:flex;align-items:center;justify-content:center;
-    height:60px;opacity:.7;transition:opacity .2s,filter .2s;
+    height:95px;opacity:.7;transition:opacity .2s,filter .2s;cursor:pointer;
   }
   .logo img{
-    max-height:60px;max-width:170px;width:auto;object-fit:contain;display:block;
+    max-height:95px;max-width:325px;width:auto;object-fit:contain;display:block;
   }
   .logo:hover{opacity:1}
+  .logo .tip{
+    position:absolute;bottom:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(4px);
+    background:var(--panel-hi);color:var(--ink);
+    font-family:"Sora",sans-serif;font-weight:600;font-size:.8rem;white-space:nowrap;
+    padding:7px 12px;border-radius:9px;border:1px solid var(--line);
+    opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:5;
+  }
+  .logo .tip::after{
+    content:"";position:absolute;top:100%;left:50%;transform:translateX(-50%);
+    border:6px solid transparent;border-top-color:var(--panel-hi);
+  }
+  .logo:hover .tip,.logo.tip-open .tip{
+    opacity:1;transform:translateX(-50%) translateY(0);
+  }
 
   /* REVIEWS */
   .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -203,6 +239,9 @@
   @media(max-width:860px){
     .services,.games-grid,.reviews{grid-template-columns:1fr}
     .nav nav{display:none}
+    .nav-cta{display:none}
+    .nav-toggle{display:flex}
+    .mobile-menu{display:flex}
     .stats{gap:36px}
     .contact-card{padding:32px}
   }
@@ -226,9 +265,19 @@
       <a href="#games">Games</a>
       <a href="#partners">Partners</a>
       <a href="#reviews">Reviews</a>
-      <a href="#contact">Contact</a>
     </nav>
-    <a href="#contact" class="btn">Get in touch</a>
+    <a href="#contact" class="btn nav-cta">Get in touch</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home">About Us</a>
+    <a href="#services">Services</a>
+    <a href="#games">Games</a>
+    <a href="#partners">Partners</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#contact" class="btn" style="margin-top:8px">Get in touch</a>
   </div>
 </header>
 
@@ -246,8 +295,8 @@
   </div>
   <div class="stats">
     <div class="stat"><div class="n">3.0M+</div><div class="l">Total Play Sessions</div></div>
-    <div class="stat"><div class="n">19K+</div><div class="l">Total Members</div></div>
-    <div class="stat"><div class="n">7</div><div class="l">Total Games</div></div>
+    <div class="stat"><div class="n">20K+</div><div class="l">Total Members</div></div>
+    <div class="stat"><div class="n" id="totalGames">8</div><div class="l">Total Games</div></div>
   </div>
 </section>
 </div>
@@ -307,7 +356,9 @@
     <p class="sec-sub">Teams and brands we've collaborated with.</p>
   </div>
   <div class="marquee">
-    <div class="marquee-track" id="track"></div>
+    <div class="marquee-clip">
+      <div class="marquee-track" id="track"></div>
+    </div>
   </div>
 </section>
 
@@ -316,28 +367,33 @@
   <div class="wrap">
     <div class="eyebrow"><span class="mono">Testimonials</span></div>
     <h2 class="sec-title">What Clients Say</h2>
-    <p class="sec-sub">Feedback from the developers and teams we've worked with.</p>
+    <p class="sec-sub">Feedback from some of the developers and teams we've worked with.</p>
     <div class="reviews">
       <div class="review">
         <div class="stars">★★★★★</div>
-        <p>"The acquisition process was smooth and fair. They valued the work
-           we put in and made the handoff painless."</p>
-        <div class="who"><div class="av">JM</div>
-          <div><b>Jordan M.</b><span>Indie Developer</span></div></div>
+        <p>"The team completely rebuilt and polished the game while bringing much more structure to development. 
+          They were able to assemble a solid team and noticeably improve the overall quality of the project from
+          its original state."
+        </p>
+        <div class="who"><div class="av">T</div>
+          <div><b>Taniumn</b><span>@RealTaniumn | Mage Tower Defense</span></div></div>
       </div>
       <div class="review">
         <div class="stars">★★★★★</div>
-        <p>"Their team rebuilt our game's core loop and our retention nearly
-           doubled within a month. Genuinely impressive."</p>
-        <div class="who"><div class="av">SK</div>
-          <div><b>Sam K.</b><span>Studio Lead</span></div></div>
+        <p>"The UI process was professional from start to finish. Before production, they 
+          created mock-up concepts and collaborated closely with us to ensure the direction and 
+          design fit the vision of the game. They also handled importing the UI directly into Roblox Studio, 
+          correctly sizing and organizing all elements, which significantly reduced the amount of setup work 
+          needed on our end. Everything was delivered cleanly, professionally, and well-structured"
+        </p>
+        <div class="who"><div class="av">NA</div>
+          <div><b>galdurak</b><span>@galdurak | RISE OF VILTRUM</span></div></div>
       </div>
       <div class="review">
         <div class="stars">★★★★★</div>
-        <p>"The advising sessions gave us a clear roadmap. We finally
-           understood what the algorithm actually rewards."</p>
-        <div class="who"><div class="av">AR</div>
-          <div><b>Alex R.</b><span>Game Creator</span></div></div>
+        <p>"n/a"</p>
+        <div class="who"><div class="av">NA</div>
+          <div><b>N?A</b><span>@N?A</span></div></div>
       </div>
     </div>
   </div>
@@ -420,7 +476,25 @@
      url:"https://www.roblox.com/games/2734651799/Limited-Lifting-Simulator"},
     {n:"Amazing Obby", plays:"2.6K Plays", role:"Owner", img:"Assets/AmazingObbyIcon.png",
      url:"https://www.roblox.com/games/72000569347548/Amazing-Obby"},
+    {n:"Mage Tower Defense", plays:"1.7K Plays", role:"Manager", img:"Assets/mageTD.png",
+     url:"https://www.roblox.com/games/92923167709043/Mage-Tower-Defense"},
+    {n:"RISE OF VILTRUM", plays:"983K Plays", role:"UI Designer", img:"Assets/RiseOfViltrum.png",
+     url:"https://www.roblox.com/games/99058397196974/RISE-OF-VILTRUM"},
+    {n:"Hallowed Earth", plays:"165.4K Plays", role:"UI Designer", img:"Assets/hallowedearthofficial.png",
+     url:"https://www.roblox.com/games/71883129193014/Hallowed-Earth-Dinosaur-Survival"},
   ];
+  // Sort games by play count, highest to lowest.
+  // Parses values like "2.9M Plays", "278.3K Plays", "850 Plays" into a number.
+  const playsToNumber = str => {
+    const m = String(str).match(/([\d.]+)\s*([MmKk]?)/);
+    if (!m) return 0;
+    const num = parseFloat(m[1]);
+    const suffix = m[2].toUpperCase();
+    if (suffix === "M") return num * 1e6;
+    if (suffix === "K") return num * 1e3;
+    return num;
+  };
+  games.sort((a, b) => playsToNumber(b.plays) - playsToNumber(a.plays));
   // Icon shown next to each role. Add/edit entries here (role name : Font Awesome icon).
   // Any role not listed falls back to the briefcase icon.
   const roleIcons = {
@@ -434,6 +508,9 @@
   const iconFor = role => roleIcons[role] || "fa-briefcase";
   const grid = document.getElementById('gamesGrid');
   const SHOWN = 3;
+  // Total Games stat updates automatically from the games array length
+  const totalGamesEl = document.getElementById('totalGames');
+  if (totalGamesEl) totalGamesEl.textContent = games.length;
   games.forEach((g,i)=>{
     const a = document.createElement('a');
     a.href = g.url; a.target = "_blank"; a.rel = "noopener noreferrer";
@@ -461,20 +538,88 @@
     if(!expanded) document.getElementById('games').scrollIntoView({behavior:'smooth'});
   });
 
-  // ---- PARTNERS MARQUEE (edit names + image files; duplicated for seamless loop) ----
+ // ---- PARTNERS MARQUEE (edit names + image files; duplicated for seamless loop) ----
   // Put each partner's logo in the Assets folder and update "img" + "n" (alt text).
- const partners = [
+  const partners = [
     {n:"Beerded Games Studio",   img:"Assets/beerdedgames.png"},
     {n:"GringGreat",   img:"Assets/gringgreat.png"},
-    {n:"Crimson Manor", img:"Assets/crimsonmanor.png"},
     {n:"FindGames", img:"Assets/FTG.png"},
   ];
   const track = document.getElementById('track');
   const set = partners.map(p=>
     `<div class="logo"><img src="${p.img}" alt="${p.n}"
-       onerror="this.parentNode.style.display='none'"></div>`
+       onerror="this.parentNode.style.display='none'"><span class="tip">${p.n}</span></div>`
   ).join('');
   track.innerHTML = set + set;
+
+  // Handle temporary 3-second visibility on hover or click without stopping the track
+  document.querySelectorAll('.logo').forEach(logo => {
+    let timer;
+
+    const showTooltip = () => {
+      // Clear any existing timers on this logo
+      clearTimeout(timer);
+      
+      // Close other open tips first
+      document.querySelectorAll('.logo.tip-open').forEach(l => l.classList.remove('tip-open'));
+      
+      // Open this tooltip
+      logo.classList.add('tip-open');
+
+      // Hide it automatically after 3 seconds (3000ms)
+      timer = setTimeout(() => {
+        logo.classList.remove('tip-open');
+      }, 3000);
+    };
+
+    // Desktop hover handling
+    logo.addEventListener('mouseenter', showTooltip);
+    logo.addEventListener('mouseleave', () => {
+      clearTimeout(timer);
+      logo.classList.remove('tip-open');
+    });
+
+    // Mobile/Tablet tap handling
+    logo.addEventListener('click', e => {
+      showTooltip();
+      e.stopPropagation();
+    });
+  });
+
+  // Remove the CSS hover pause rule dynamically so scrolling never interrupts
+  const styleSheet = document.createElement("style");
+  styleSheet.innerText = ".marquee:hover .marquee-track { animation-play-state: running !important; }";
+  document.head.appendChild(styleSheet);
+
+  // Mobile: tap a logo to toggle its name (closes others)
+  document.querySelectorAll('.logo').forEach(logo=>{
+    logo.addEventListener('click', e=>{
+      const wasOpen = logo.classList.contains('tip-open');
+      document.querySelectorAll('.logo.tip-open').forEach(l=>l.classList.remove('tip-open'));
+      if(!wasOpen) logo.classList.add('tip-open');
+      e.stopPropagation();
+    });
+  });
+  document.addEventListener('click',()=>{
+    document.querySelectorAll('.logo.tip-open').forEach(l=>l.classList.remove('tip-open'));
+  });
+
+  // ---- MOBILE MENU ----
+  const navToggle = document.getElementById('navToggle');
+  const mobileMenu = document.getElementById('mobileMenu');
+  function closeMenu(){
+    navToggle.classList.remove('open');
+    mobileMenu.classList.remove('open');
+    navToggle.setAttribute('aria-expanded','false');
+  }
+  navToggle.addEventListener('click',()=>{
+    const isOpen = mobileMenu.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  mobileMenu.querySelectorAll('a').forEach(link=>{
+    link.addEventListener('click', closeMenu);
+  });
 
   // ---- BACK TO TOP ----
   const toTop = document.getElementById('toTop');
