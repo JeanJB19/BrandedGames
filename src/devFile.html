@@ -294,7 +294,7 @@
     <a href="#games" class="btn ghost">See our games</a>
   </div>
   <div class="stats">
-    <div class="stat"><div class="n">3.0M+</div><div class="l">Total Play Sessions</div></div>
+    <div class="stat"><div class="n" id="totalPlays">3.0M+</div><div class="l">Total Play Sessions</div></div>
     <div class="stat"><div class="n">20K+</div><div class="l">Total Members</div></div>
     <div class="stat"><div class="n" id="totalGames">8</div><div class="l">Total Games</div></div>
   </div>
@@ -370,7 +370,7 @@
     <p class="sec-sub">Feedback from some of the developers and teams we've worked with.</p>
     <div class="reviews">
       <div class="review">
-        <div class="stars">★★★★★</div>
+        <div class="stars">★★★★</div>
         <p>"The team completely rebuilt and polished the game while bringing much more structure to development. 
           They were able to assemble a solid team and noticeably improve the overall quality of the project from
           its original state."
@@ -386,7 +386,7 @@
           correctly sizing and organizing all elements, which significantly reduced the amount of setup work 
           needed on our end. Everything was delivered cleanly, professionally, and well-structured"
         </p>
-        <div class="who"><div class="av">NA</div>
+        <div class="who"><div class="av">G</div>
           <div><b>galdurak</b><span>@galdurak | RISE OF VILTRUM</span></div></div>
       </div>
       <div class="review">
@@ -476,7 +476,7 @@
      url:"https://www.roblox.com/games/2734651799/Limited-Lifting-Simulator"},
     {n:"Amazing Obby", plays:"2.6K Plays", role:"Owner", img:"Assets/AmazingObbyIcon.png",
      url:"https://www.roblox.com/games/72000569347548/Amazing-Obby"},
-    {n:"Mage Tower Defense", plays:"1.7K Plays", role:"Manager", img:"Assets/mageTD.png",
+    {n:"Mage Tower Defense", plays:"1.7K Plays", role:"Publisher", img:"Assets/mageTD.png",
      url:"https://www.roblox.com/games/92923167709043/Mage-Tower-Defense"},
     {n:"RISE OF VILTRUM", plays:"983K Plays", role:"UI Designer", img:"Assets/RiseOfViltrum.png",
      url:"https://www.roblox.com/games/99058397196974/RISE-OF-VILTRUM"},
@@ -504,6 +504,7 @@
     "Manager":     "fa-user-gear",
     "Investor":    "fa-chart-line",
     "Advisor":     "fa-compass",
+    "Publisher":   "fa-bullhorn",
   };
   const iconFor = role => roleIcons[role] || "fa-briefcase";
   const grid = document.getElementById('gamesGrid');
@@ -511,6 +512,19 @@
   // Total Games stat updates automatically from the games array length
   const totalGamesEl = document.getElementById('totalGames');
   if (totalGamesEl) totalGamesEl.textContent = games.length;
+
+  // Total Play Sessions stat updates automatically by summing the games array.
+  // Formats the total compactly: 1,250,000 -> "1.2M+", 45,400 -> "45.4K+", 850 -> "850+"
+  const formatPlays = n => {
+    if (n >= 1e6) return (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M+';
+    if (n >= 1e3) return (n / 1e3).toFixed(1).replace(/\.0$/, '') + 'K+';
+    return Math.round(n) + '+';
+  };
+  const totalPlaysEl = document.getElementById('totalPlays');
+  if (totalPlaysEl) {
+    const totalPlays = games.reduce((sum, g) => sum + playsToNumber(g.plays), 0);
+    totalPlaysEl.textContent = formatPlays(totalPlays);
+  }
   games.forEach((g,i)=>{
     const a = document.createElement('a');
     a.href = g.url; a.target = "_blank"; a.rel = "noopener noreferrer";
