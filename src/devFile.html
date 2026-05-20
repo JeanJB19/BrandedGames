@@ -90,7 +90,7 @@
   .hero-bg{position:relative;isolation:isolate;overflow:hidden}
   .hero-bg::before{
     content:"";position:absolute;inset:0;z-index:0;
-    background:url('Assets/Banner1.png') center/cover no-repeat;
+    background:url('Assets/Banner2.png') center/cover no-repeat;
   }
   .hero-bg::after{
     content:"";position:absolute;inset:0;z-index:1;
@@ -137,6 +137,41 @@
   }
   .game:hover{transform:translateY(-5px);border-color:rgba(124,140,255,.5)}
   .game .thumb{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--panel-hi)}
+  /* Thumb wrapper holds the image and the role overlay */
+  .game .thumb-wrap{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--panel-hi)}
+  .game .role-overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg,#ffffff 0%,#f4f6ff 100%);
+    color:#0a0e1a;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    padding:22px;text-align:center;
+    opacity:0;pointer-events:none;
+    transition:opacity .28s ease;
+  }
+  .game .role-overlay .role-badge{
+    display:inline-flex;align-items:center;gap:7px;
+    font-family:"JetBrains Mono",monospace;font-size:.7rem;letter-spacing:.16em;
+    text-transform:uppercase;font-weight:600;
+    color:#0a0e1a;
+    background:linear-gradient(135deg,rgba(70,224,200,.25),rgba(124,140,255,.25));
+    border:1px solid rgba(10,14,26,.12);
+    padding:6px 12px;border-radius:999px;margin-bottom:14px;
+  }
+  .game .role-overlay .role-desc{
+    font-family:"Sora",sans-serif;font-weight:500;font-size:.92rem;
+    line-height:1.5;color:#1a2440;max-width:30ch;
+  }
+  .game .role-overlay .role-hint{
+    margin-top:14px;
+    font-family:"JetBrains Mono",monospace;font-size:.65rem;letter-spacing:.18em;
+    text-transform:uppercase;color:#5a6890;
+  }
+  /* Desktop: reveal on hover */
+  @media (hover:hover) and (pointer:fine){
+    .game:hover .role-overlay{opacity:1}
+  }
+  /* Mobile / touch: reveal when card has .peek (toggled by tap) */
+  .game.peek .role-overlay{opacity:1}
   .game .body{padding:18px 20px}
   .game h4{font-family:"Sora";font-weight:700;font-size:1.08rem;margin-bottom:10px;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -462,32 +497,46 @@
   // Edit the "role" field for each game with the correct position.
   const games = [
     {n:"Speed Simulator", plays:"2.9M Plays", role:"Owner", img:"Assets/SpeedSimIcon.png",
+     desc:"Owned and directed the project's end-to-end — vision, team, and live operations.",
      url:"https://www.roblox.com/games/2130573407/Speed-Drink-Simulator"},
     {n:"SkyLands Tycoon", plays:"129.3K Plays", role:"Owner", img:"Assets/skylandsIcon.png",
+     desc:"We own and lead the development of the game, overseeing overall game design and direction while focusing heavily on programming and UI design",
      url:"https://www.roblox.com/games/92054108165942/SkyLands-Tycoon"},
     {n:"Roblox But Every Second You Get +1 Size!", plays:"278.3K Plays", role:"UI Designer", img:"Assets/+1SizeGame.png",
+     desc:"Responsible for designing and implementing a specific segment of the game’s user interface, ensuring it aligned with the project’s requirements and was delivered to specification.",
      url:"https://www.roblox.com/games/11403211837/Roblox-But-Every-Second-You-Get-1-Size"},
     {n:"Fame Simulator", plays:"45.4K Plays", role:"Owner", img:"Assets/famesimicon.png",
+      desc:"Owned and directed the project's end-to-end — vision, team, and live operations.",
      url:"https://www.roblox.com/games/2668515686/Fame-Simulator"},
     {n:"Shred a Pet", plays:"15.2K Plays", role:"Former Owner", img:"Assets/ShredAPet.png",
+     desc:"We acquired and scaled the project before selling ownership to a new team.",
      url:"https://www.roblox.com/games/107508702684449/Shred-a-Pet"},
     {n:"Barbarian Lifting Simulator", plays:"13.9K Plays", role:"Owner", img:"Assets/barbarianliftingsim.png",
+      desc:"Owned and directed the project's end-to-end — vision, team, and live operations.",
      url:"https://www.roblox.com/games/2574294965/Barbarian-Lifting-Simulator-Alpha"},
     {n:"Limited Lifting Simulator", plays:"5.7K Plays", role:"Owner", img:"Assets/limitedlifitngsim.png",
+     desc:"Owned and directed the project's end-to-end — vision, team, and live operations.",
      url:"https://www.roblox.com/games/2734651799/Limited-Lifting-Simulator"},
     {n:"Amazing Obby", plays:"2.6K Plays", role:"Owner", img:"Assets/AmazingObbyIcon.png",
+    desc:"Owned and directed the project's end-to-end — vision, team, and live operations.",
      url:"https://www.roblox.com/games/72000569347548/Amazing-Obby"},
     {n:"Mage Tower Defense", plays:"1.7K Plays", role:"Publisher", img:"Assets/mageTD.png",
+     desc:"Publishing partner — supported launch, growth, and ongoing live operations.",
      url:"https://www.roblox.com/games/92923167709043/Mage-Tower-Defense"},
     {n:"RISE OF VILTRUM", plays:"983K Plays", role:"UI Designer", img:"Assets/RiseOfViltrum.png",
+     desc:"Contributed to the development of several user interface elements, including the Skill Tree, ensuring they were functional, intuitive, and aligned with the game’s overall design.",
      url:"https://www.roblox.com/games/99058397196974/RISE-OF-VILTRUM"},
     {n:"Hallowed Earth", plays:"165.4K Plays", role:"UI Designer", img:"Assets/hallowedearthofficial.png",
+     desc:"Designed and implemented the in-game UI — menus and HUD.",
      url:"https://www.roblox.com/games/71883129193014/Hallowed-Earth-Dinosaur-Survival"},
     {n:"Anime Speed Clicker", plays:"1.9M Plays", role:"Programmer", img:"Assets/animespeedclicker.png",
+     desc:"We contributed to the development of multiple components within the in-game marketplace system, including core functionality and supporting features.",
      url:"https://www.roblox.com/games/8689631194/Anime-Speed-Clicker"},
     {n:"Empire Hotel Tycoon", plays:"4.1M Plays", role:"Programmer", img:"Assets/empirehoteltycoon.png",
+     desc:"We were one of two programmers on the project, primarily responsible for developing the NPC system and contributing to UI scripting. We also handled quality-of-life improvements, including gameplay polish, visual effects, and debugging to ensure a smoother player experience.",
      url:"https://www.roblox.com/games/7774930285/Empire-Hotel-Tycoon"},
     {n:"Paper Ball Simulator", plays:"17.7M Plays", role:"UI Designer", img:"Assets/paperballsim.png",
+     desc:"Responsible for developing and importing the game’s user interface.",
      url:"https://www.roblox.com/games/2969874963/Paper-Ball-Simulator"}
   ];
   // Sort games by play count, highest to lowest.
@@ -537,8 +586,15 @@
     a.href = g.url; a.target = "_blank"; a.rel = "noopener noreferrer";
     a.className = 'game' + (i>=SHOWN ? ' hidden' : '');
     a.innerHTML = `
-      <img class="thumb" src="${g.img}" alt="${g.n}"
-           onerror="this.style.background='var(--panel-hi)';this.removeAttribute('src');">
+      <div class="thumb-wrap">
+        <img class="thumb" src="${g.img}" alt="${g.n}"
+             onerror="this.style.background='var(--panel-hi)';this.removeAttribute('src');">
+        <div class="role-overlay" aria-hidden="true">
+          <span class="role-badge"><i class="fas ${iconFor(g.role)}"></i>${g.role}</span>
+          <p class="role-desc">${g.desc || ''}</p>
+          <span class="role-hint">Tap again to open →</span>
+        </div>
+      </div>
       <div class="body">
         <h4>${g.n}</h4>
         <div class="meta">
@@ -548,6 +604,34 @@
       </div>`;
     grid.appendChild(a);
   });
+
+  // ---- TAP-TO-REVEAL on touch devices ----
+  // Desktop uses CSS :hover. On touch devices, the first tap reveals the
+  // role overlay; a second tap follows the link. Tapping outside or on
+  // another card closes any open overlay. Auto-closes after 4s.
+  const isTouch = window.matchMedia('(hover:none), (pointer:coarse)').matches;
+  if (isTouch) {
+    let peekTimer;
+    const closeAllPeeks = () => {
+      document.querySelectorAll('.game.peek').forEach(el => el.classList.remove('peek'));
+      clearTimeout(peekTimer);
+    };
+    document.querySelectorAll('.game').forEach(card => {
+      card.addEventListener('click', e => {
+        if (!card.classList.contains('peek')) {
+          // First tap: show overlay, block navigation
+          e.preventDefault();
+          closeAllPeeks();
+          card.classList.add('peek');
+          peekTimer = setTimeout(() => card.classList.remove('peek'), 4000);
+          e.stopPropagation();
+        }
+        // Second tap: card is already peeking — let the link open normally
+      });
+    });
+    // Tap anywhere else closes any open overlay
+    document.addEventListener('click', closeAllPeeks);
+  }
   const moreBtn = document.getElementById('moreBtn');
   let expanded = false;
   moreBtn.addEventListener('click',()=>{
@@ -565,6 +649,7 @@
     {n:"Beerded Games Studio",   img:"Assets/beerdedgames.png"},
     {n:"GringGreat",   img:"Assets/gringgreat.png"},
     {n:"FindGames", img:"Assets/FTG.png"},
+    {n:"Table Flip Studios", img:"Assets/TableFlipStudios.png"},
   ];
   const track = document.getElementById('track');
   const set = partners.map(p=>
