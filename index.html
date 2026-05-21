@@ -166,6 +166,16 @@
     font-family:"JetBrains Mono",monospace;font-size:.65rem;letter-spacing:.18em;
     text-transform:uppercase;color:#5a6890;
   }
+  .game .role-overlay .role-private{
+    display:inline-flex;align-items:center;gap:6px;
+    margin-top:12px;
+    font-family:"JetBrains Mono",monospace;font-size:.65rem;letter-spacing:.16em;
+    text-transform:uppercase;font-weight:600;
+    color:#8a3a3a;
+    background:rgba(220,80,80,.08);
+    border:1px solid rgba(220,80,80,.25);
+    padding:5px 10px;border-radius:999px;
+  }
   /* Desktop: reveal on hover */
   @media (hover:hover) and (pointer:fine){
     .game:hover .role-overlay{opacity:1}
@@ -507,15 +517,18 @@
      url:"https://www.roblox.com/games/11403211837/Roblox-But-Every-Second-You-Get-1-Size"},
     {n:"Fame Simulator", plays:"45.4K Plays", role:"Owner", img:"Assets/famesimicon.png",
       desc:"Owned and directed the project's end-to-end — vision, team, and live operations.",
+     private:true,
      url:"https://www.roblox.com/games/2668515686/Fame-Simulator"},
     {n:"Shred a Pet", plays:"15.2K Plays", role:"Former Owner", img:"Assets/ShredAPet.png",
      desc:"We acquired and scaled the project before selling ownership to a new team.",
      url:"https://www.roblox.com/games/107508702684449/Shred-a-Pet"},
     {n:"Barbarian Lifting Simulator", plays:"13.9K Plays", role:"Owner", img:"Assets/barbarianliftingsim.png",
       desc:"Owned and directed the project's end-to-end — vision, team, and live operations.",
+     private:true,
      url:"https://www.roblox.com/games/2574294965/Barbarian-Lifting-Simulator-Alpha"},
     {n:"Limited Lifting Simulator", plays:"5.7K Plays", role:"Owner", img:"Assets/limitedlifitngsim.png",
      desc:"Owned and directed the project's end-to-end — vision, team, and live operations.",
+     private:true,
      url:"https://www.roblox.com/games/2734651799/Limited-Lifting-Simulator"},
     {n:"Amazing Obby", plays:"2.6K Plays", role:"Owner", img:"Assets/AmazingObbyIcon.png",
     desc:"Owned and directed the project's end-to-end — vision, team, and live operations.",
@@ -537,8 +550,16 @@
      url:"https://www.roblox.com/games/7774930285/Empire-Hotel-Tycoon"},
     {n:"Paper Ball Simulator", plays:"17.7M Plays", role:"UI Designer", img:"Assets/paperballsim.png",
      desc:"Responsible for developing and importing the game’s user interface.",
-     url:"https://www.roblox.com/games/2969874963/Paper-Ball-Simulator"}
+     url:"https://www.roblox.com/games/2969874963/Paper-Ball-Simulator"},
+    {n:"Deserted Story", plays:"4.3M Plays", role:"UI Designer", img:"Assets/deserted.png",
+     desc:"Responsible for developing and importing the game’s user interface.",
+     private:true,
+     url:"https://www.roblox.com/games/3387051590/Deserted-STORY"},
+    {n:"Crimson Manor", plays:"700 Plays", role:"Programmer", img:"Assets/crimsonmanor.png",
+     desc:"We were responsible for programming the game’s core systems, including gameplay mechanics, user interface functionality, pet and combat systems. Additionally, we implemented all UI assets and worked closely with the team to polish and enhance the overall player experience.",
+     url:"https://www.roblox.com/communities/345848900/Crimson-Manor#!/about"},
   ];
+
   // Sort games by play count, highest to lowest.
   // Parses values like "2.9M Plays", "278.3K Plays", "850 Plays" into a number.
   const playsToNumber = str => {
@@ -592,6 +613,7 @@
         <div class="role-overlay" aria-hidden="true">
           <span class="role-badge"><i class="fas ${iconFor(g.role)}"></i>${g.role}</span>
           <p class="role-desc">${g.desc || ''}</p>
+          ${g.private ? '<span class="role-private"><i class="fas fa-lock"></i>Privated Game</span>' : ''}
           <span class="role-hint">Tap again to open →</span>
         </div>
       </div>
